@@ -43,4 +43,14 @@ public class CinemaController : ControllerBase
             ? NotFound("There is no cinema with given ID")
             : Ok(ret);
     }
+
+    [HttpPost("delete-cinema/{Id}")]
+    public async Task<ActionResult<string>> DeleteCinemaAsync(Guid Id, CancellationToken cancellationToken)
+    {
+        var ret = await _mediator.Send(new DeleteCinemaCommand(Id), cancellationToken);
+
+        return ret == String.Empty
+            ? NotFound("There is no cinema with given ID")
+            : Ok(ret);
+    }
 }

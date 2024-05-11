@@ -33,9 +33,17 @@ namespace Code9.Infrastructure.Repositories
 
         }
 
+        public async Task Delete(Cinema cinema, CancellationToken cancellationToken)
+        {
+            _dbContext.Remove<Cinema>(cinema);
+
+            await _dbContext.SaveChangesAsync(cancellationToken);
+
+        }
+
         public async Task<Cinema> GetCinemaByIdAsync(Guid id, CancellationToken cancellationToken)
         {
-            return await _dbContext.FindAsync<Cinema>(id);
+            return await _dbContext.Cinemas.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
     }
 }
