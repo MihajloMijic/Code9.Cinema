@@ -32,5 +32,10 @@ namespace Code9.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync(cancellationToken);
 
         }
+
+        public async Task<Cinema> GetCinemaByIdAsync(Guid id, CancellationToken cancellationToken)
+        {
+            return await _dbContext.FindAsync<Cinema>(id);
+        }
     }
 }

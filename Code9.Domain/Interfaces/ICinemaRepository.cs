@@ -9,5 +9,7 @@ namespace Code9.Domain.Interfaces
         Task Add(Cinema cinema, CancellationToken cancellationToken);
 
         Task Update(Cinema cinema, CancellationToken cancellationToken);
+
+        Task<Cinema> GetCinemaByIdAsync(Guid id, CancellationToken cancellationToken);
     }
 }
