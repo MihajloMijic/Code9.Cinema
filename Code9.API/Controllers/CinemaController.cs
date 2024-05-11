@@ -2,6 +2,7 @@
 using Code9.Domain.Models;
 using Code9.Domain.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Code9.API.Controllers;
@@ -31,5 +32,15 @@ public class CinemaController : ControllerBase
         var ret = await _mediator.Send(request, cancellationToken);
 
         return Ok(ret);
+    }
+
+    [HttpPost("update-cinema/{Id}")]
+    public async Task<ActionResult<string>> UpdateCinemaAsync(Guid Id, [FromBody] Cinema cinema, CancellationToken cancellationToken)
+    {
+        var ret = await _mediator.Send(new UpdateCinemaCommand(Id,cinema), cancellationToken);
+
+        return ret == String.Empty
+            ? NotFound("There is no cinema with given ID")
+            : Ok(ret);
     }
 }
