@@ -1,9 +1,14 @@
 using Code9.Domain.Interfaces;
+using Code9.Domain.Queries;
 using Code9.Infrastructure;
 using Code9.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddMediatR(config => config.RegisterServicesFromAssemblies(typeof(GetAllCinemasQuery).Assembly));
 
 // Add services to the container.
 builder.Services.AddDbContext<CinemaDbContext>(options =>
