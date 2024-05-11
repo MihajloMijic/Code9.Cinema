@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
 namespace Code9.Domain.Commands;
 
-internal class AddCinemaCommand
-{
+public record AddCinemaCommand(string Name, string City, string Street, int NumberOfAuditoriums) : IRequest<string>;
 
-}
+
